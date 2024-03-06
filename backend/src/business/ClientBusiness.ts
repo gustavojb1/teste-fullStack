@@ -146,33 +146,30 @@ export class ClientBusiness {
         };
     
         // Calcular todas as permutações possíveis
-        for (let i = 0; i < clientsToCalculate.length; i++) {
-            const remaining = clientsToCalculate.slice(0, i).concat(clientsToCalculate.slice(i + 1));
-            const routes = this.permute(remaining);
-    
-            for (const route of routes) {
-                let distance = 0;
-                let lastPoint = empresa;  // A empresa
-    
-                for (const point of route) {
-                    distance += this.calculateDistance(lastPoint, point);
-                    lastPoint = point;
-                }
-    
-                distance += this.calculateDistance(lastPoint, empresa);  // Retornar à empresa
-    
-                if (distance < shortestDistance) {
-                    shortestDistance = distance;
-                    shortestRoute = [clientsToCalculate[i]].concat(route);
-                }
+        const routes = this.permute(clientsToCalculate);
+
+        for (const route of routes) {
+            let distance = 0;
+            let lastPoint = empresa;  // A empresa
+        
+            for (const point of route) {
+                distance += this.calculateDistance(lastPoint, point);
+                lastPoint = point;
+            }
+        
+            distance += this.calculateDistance(lastPoint, empresa);  // Retornar à empresa
+        
+            if (distance < shortestDistance) {
+                shortestDistance = distance;
+                shortestRoute = [empresa].concat(route).concat(empresa);
             }
         }
 
-        console.log(shortestRoute);
+        const shortRoutesWithouthEmpresa = shortestRoute.filter((client) => client.id !== 0);
     
         // Buscar novamente os dados completos dos clientes
         const shortestRouteClients: Client[] = [];
-        for (const client of shortestRoute) {
+        for (const client of shortRoutesWithouthEmpresa) {
             const clientDB = clientsDB.find(c => c.id === client.id);
             if (clientDB) {
                 shortestRouteClients.push(new Client(
@@ -212,19 +209,7 @@ export class ClientBusiness {
         return result;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     public async heuristic(): Promise<BruteForceOutputDTO> {
         const clientsDB: ClientDB[] = await this.clientDatabase.getClients(
             1,
@@ -296,6 +281,7 @@ export class ClientBusiness {
                 throw new NotFoundError(`Cliente com ID ${client.id} não encontrado`);
             }
         }
+
     
         return this.clientDTO.heuristicOutput(routeClients);
     }
