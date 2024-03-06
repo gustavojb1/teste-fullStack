@@ -56,6 +56,13 @@ export interface DeleteClientOutputDTO {
   message: string;
 }
 
+export interface BruteForceOutputDTO {
+  rota: ClientDB[];
+}
+export interface HeuristicOutputDTO {
+  rota: ClientDB[];
+}
+
 export class ClientDTO {
   getClientInput = (
     page: number,
@@ -149,4 +156,33 @@ export class ClientDTO {
   deleteClientOutput = (message: string): string => {
     return message;
   };
+
+  bruteForceOutput = (rota: Client[]): BruteForceOutputDTO => {
+    return {
+      rota: rota.map((client) => ({
+        id: client.getId(),
+        nome: client.getNome(),
+        email: client.getEmail(),
+        telefone: client.getTelefone(),
+        x: client.getX(),
+        y: client.getY(),
+      })),
+    };
+  };
+
+  heuristicOutput = (rota: Client[]): HeuristicOutputDTO => {
+    return {
+      rota: rota.map((client) => ({
+        id: client.getId(),
+        nome: client.getNome(),
+        email: client.getEmail(),
+        telefone: client.getTelefone(),
+        x: client.getX(),
+        y: client.getY(),
+      })),
+    };
+  };
+
 }
+
+
