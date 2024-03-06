@@ -63,4 +63,23 @@ export class ClientController {
       }
     }
   };
+
+  public deleteClient = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+
+      const input = this.clientDTO.deleteClientInput(id);
+      const output = await this.clientBusiness.deleteClient(id);
+
+      res.status(200).send("Cliente deletado com sucesso");
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof BaseError) {
+        res.status(error.statusCode).send(error.message);
+      } else {
+        res.status(500).send("Erro inesperado");
+      }
+    }
+  };
 }

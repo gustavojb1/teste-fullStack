@@ -63,10 +63,10 @@ export class ClientDatabase extends BaseDatabase {
 
   public async countClients(nome?: string, email?: string, telefone?: string) {
     const conditions = {} as any;
-    if (nome !== undefined) conditions.nome = nome;
-    if (email !== undefined) conditions.email = email;
-    if (telefone !== undefined) conditions.telefone = telefone;
-  
+    if (nome !== undefined && nome) conditions.nome = nome;
+    if (email !== undefined && email) conditions.email = email;
+    if (telefone !== undefined && telefone ) conditions.telefone = telefone;
+
     const totalItems: any[] = await BaseDatabase.connection(ClientDatabase.TABLE_CLIENT)
       .where(conditions)
       .count('* as count');
@@ -89,8 +89,21 @@ export class ClientDatabase extends BaseDatabase {
     return result;
   }
 
+  public async findClientById(id: number) {
+    const [result]: ClientDB[] | undefined[] = await BaseDatabase
+      .connection(ClientDatabase.TABLE_CLIENT)
+      .where({ id });
+    return result;
+  }
+
   public async createClient(client: ClientDB) {
     await BaseDatabase.connection(ClientDatabase.TABLE_CLIENT)
       .insert(client);
+  }
+
+  public async deleteClient(id: number) {
+    await BaseDatabase.connection(ClientDatabase.TABLE_CLIENT)
+      .where({ id })
+      .del();
   }
 }
