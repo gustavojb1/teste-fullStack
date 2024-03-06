@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 import Toast from "./Toast";
+import TrashSvg from '/public/trash.svg';
 
 const TableContent = styled.div`
   display: flex;
@@ -86,7 +87,7 @@ const TableItem = styled.div`
 `;
 
 const TableItemData = styled.div`
-  padding: 0.75rem;
+  padding: 0.75rem 0rem;
   text-align: center;
   border-right: 1px solid var(--gray-300);
   overflow: auto;
@@ -194,6 +195,12 @@ const ActualPage = styled.div`
   justify-content: center;
 `;
 
+const SVG = styled.img`
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+`;
+
 
 
 const TableClientes = forwardRef((props, ref) => {
@@ -227,15 +234,6 @@ const TableClientes = forwardRef((props, ref) => {
         throw new Error("Erro ao buscar clientes");
       }
       
-
-    //   if (!response.ok) {
-    //     throw new Error("Erro ao buscar clientes");
-    //   }
-
-    // } catch (error) {
-    //   setShowToast(true);
-    //   console.error(error);
-    // }
     if (!response.ok) {
       const errorData = await response.text();
       throw new Error(errorData);
@@ -284,9 +282,7 @@ const TableClientes = forwardRef((props, ref) => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-          `http://${import.meta.env.VITE_SERVER_HOST}:${
-            import.meta.env.VITE_SERVER_PORT
-          }/clients/delete/${id}`,
+          `http://${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/clients/${id}`,
           {
             method: "DELETE",
           }
@@ -298,7 +294,7 @@ const TableClientes = forwardRef((props, ref) => {
       setToastMessage("Cliente deletado com sucesso");
       setStyleToast("success");
       setShowToast(true);
-      ref.current.getDados();
+      getDados();
   } catch (error) {
       setStyleToast("warning");
       setToastMessage(error.message);
@@ -385,7 +381,7 @@ const TableClientes = forwardRef((props, ref) => {
               <TableItemData>{cliente.telefone}</TableItemData>
               <TableItemData>{cliente.x}</TableItemData>
               <TableItemData>{cliente.y}</TableItemData>
-              <TableItemData onClick={handleDelete}>x</TableItemData>
+              <TableItemData><SVG src={TrashSvg} alt="Trash" onClick={()=>{handleDelete(cliente.id)}}/></TableItemData>
             </TableItem>
           );
         })}
