@@ -15,5 +15,8 @@ const clientController = new ClientController(
   export const clientRouter = express.Router();
 
   clientRouter.get("/", clientController.getClients);
+
   clientRouter.post("/", clientController.createClient);
+
+  clientRouter.delete("/:id", clientController.deleteClient);
 

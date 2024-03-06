@@ -44,6 +44,7 @@ export class ClientBusiness {
 
         const totalPages = Math.ceil(totalItems / input.pageSize);
 
+
         return this.clientDTO.getClientOutput(clients, input.page, totalPages, totalItems);
     }
 
@@ -54,10 +55,22 @@ export class ClientBusiness {
             throw new NotFoundError("Preencha todos os campos");
         }
 
-        const userDBName = await this.clientDatabase.findClientByNome(nome);
-        if (userDBName) {
-          throw new BadRequestError("Já existe um user com esse 'nome'");
+        if (nome.length > 100) {
+            throw new BadRequestError("'nome' não deve ter mais de 100 caracteres");
         }
+    
+        if (email.length > 100) {
+            throw new BadRequestError("'email' não deve ter mais de 100 caracteres");
+        }
+    
+        if (telefone.length > 15) {
+            throw new BadRequestError("'telefone' não deve ter mais de 15 caracteres");
+        }
+
+        // const userDBName = await this.clientDatabase.findClientByNome(nome);
+        // if (userDBName) {
+        //   throw new BadRequestError("Já existe um user com esse 'nome'");
+        // }
     
         const userDBEmail = await this.clientDatabase.findClientByEmail(email);
         if (userDBEmail) {
@@ -81,5 +94,18 @@ export class ClientBusiness {
         }
 
         return output;
+    }
+    
+    public async deleteClient(id: string): Promise<void> {
+        if (!id) {
+            throw new NotFoundError("Preencha o campo 'id'");
+        }
+
+        const userDB = await this.clientDatabase.findClientById(Number(id));
+        if (!userDB) {
+            throw new NotFoundError("Não existe um user com esse 'id'");
+        }
+
+        await this.clientDatabase.deleteClient(Number(id))
     }
 }
