@@ -20,3 +20,7 @@ const clientController = new ClientController(
 
   clientRouter.delete("/:id", clientController.deleteClient);
 
+  clientRouter.get("/brute-force", clientController.bruteForce);
+
+  clientRouter.get("/heuristic", clientController.heuristic);
+
