@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é uma aplicação Full Stack desenvolvida como parte do processo seletivo para a vaga de desenvolvedor Full Stack. A aplicação é composta por um backend construído com Node.js,TypeScript, e um frontend construído com React, JavaScript.
+Este projeto é uma aplicação Full Stack desenvolvida como parte do processo seletivo para a vaga de desenvolvedor Full Stack. A aplicação é composta por um backend construído com Node.js,TypeScript, e um frontend construído com React, JavaScript. O site é responsivo, garantindo uma boa experiência do usuário em diferentes dispositivos
 
 ### Backend
 
