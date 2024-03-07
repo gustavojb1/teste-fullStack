@@ -28,7 +28,8 @@ O backend desta aplicação segue as melhores práticas de desenvolvimento, com 
 - Testes: O código é coberto por testes, garantindo que ele funcione como esperado.
 
 Test Coverage:
-!Coverage Report[https://github.com/gustavojb1/teste-fullStack/issues/12#issue-2174263259]
+![Coverage Report](https://github.com/gustavojb1/teste-fullStack/issues/12#issue-2174263259)
+
 
 ### Frontend
 
