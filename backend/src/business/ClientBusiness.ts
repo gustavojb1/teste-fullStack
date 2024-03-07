@@ -267,7 +267,6 @@ export class ClientBusiness {
             clientsToCalculate = clientsToCalculate.filter(client => client.id !== nearestPoint.id); // Remover o ponto mais próximo da lista de clientes para calcular
             currentPoint = nearestPoint; // Atualizar o ponto atual com o ponto mais próximo
         }
-        console.log(route);
     
         // Buscar novamente os dados completos dos clientes
         const routeClients: Client[] = [];
