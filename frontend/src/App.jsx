@@ -1,8 +1,10 @@
 import GlobalStyle from './components/GlobalStyle'
 import styled from 'styled-components';
 import TableClientes from './components/TableClientes';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import NewClient from './components/NewClient';
+import ButtonOpenModal from './components/ButtonOpenModal';
+import ModalRota from './components/ModalRota';
 
 const Container = styled.div`
   display: flex;
@@ -16,23 +18,27 @@ const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding:  0.75rem
+    padding:  0.75rem;
+    row-gap: 1rem;
   }
 `
 
-const Title = styled.h1`
+const Title = styled.div`
   position: relative;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 
 
   @media (max-width: 768px) {
     font-size: 1.5rem;
     justify-content: center;
     align-items: center;
+    flex-direction:  column;
   }
 `;
 
-const Text = styled.span`
+const Text = styled.h1`
   position: relative;
   background-color: var(--blue-300);
   padding: 1rem;
@@ -43,16 +49,20 @@ const Text = styled.span`
 function App() {
 
   const tableRef = useRef(null);
+  const [openModal, setOpenModal] = useState(false);
+
 
   return (
     <>
       <GlobalStyle />
+      <ModalRota openModal={openModal} setOpenModal={setOpenModal} />
       <Container>
-        <Title><Text>Teste FullStack Facilita Jurídico</Text></Title>
+        <Title>
+          <Text>Teste FullStack Facilita Jurídico</Text>
+          <ButtonOpenModal setOpenModal={setOpenModal} />
+        </Title>
         <TableClientes ref={tableRef}/>
-        {/* <button onClick={() => tableRef.current.getDados()}>Adicionar Cliente</button> */}
         <NewClient ref={tableRef}/>
-
       </Container>
     </>
   )
