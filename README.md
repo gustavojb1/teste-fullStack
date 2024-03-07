@@ -1,18 +1,8 @@
-
-
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# MUDAR PARA PÚBLICO O REPOSITÓRIO
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 # Teste para a vaga de desenvolvedor Full Stack
 
 ## Descrição
 
-Este projeto é uma aplicação Full Stack desenvolvida como parte do processo seletivo para a vaga de desenvolvedor Full Stack. A aplicação é composta por um backend construído com Node.js, Express, Knex, Jest e TypeScript, e um frontend (a ser desenvolvido).
+Este projeto é uma aplicação Full Stack desenvolvida como parte do processo seletivo para a vaga de desenvolvedor Full Stack. A aplicação é composta por um backend construído com Node.js,TypeScript, e um frontend construído com React, JavaScript.
 
 ### Backend
 
@@ -38,24 +28,60 @@ O backend desta aplicação segue as melhores práticas de desenvolvimento, com 
 - Testes: O código é coberto por testes, garantindo que ele funcione como esperado.
 
 Test Coverage:
-!Coverage Report
+!Coverage Report[https://github.com/gustavojb1/teste-fullStack/issues/12#issue-2174263259]
 
 ### Frontend
 
-(Em desenvolvimento)
+O frontend desta aplicação foi construído com React, uma biblioteca JavaScript popular para construção de interfaces de usuário. Ele utiliza o Vite como ferramenta de build, proporcionando um ambiente de desenvolvimento rápido e eficiente.
+
+#### Tecnologias utilizadas
+
+- React: versão 18.2.0
+- React-DOM: versão 18.2.0
+- Axios: versão 1.6.7
+- Styled-components: versão 6.1.8
+- PropTypes: versão 15.8.1
+- Dotenv: versão 16.4.5
+- Vite: versão 5.1.4
+
+#### Recursos
+
+- Styled-components: Esta biblioteca permite escrever CSS real em JavaScript, o que ajuda a manter os estilos vinculados aos componentes, melhorando a manutenção e a escalabilidade do código. Optei por usar styled-components para mostrar minhas habilidades com CSS sem depender de componentes prontos de bibliotecas externas.
 
 ## Instalação
 
-(Descreva o processo de instalação do projeto, incluindo os pré-requisitos necessários.)
+Siga os passos abaixo para instalar e executar o projeto localmente:
 
-## Uso
+1. **Clone o repositório**: Primeiro, você precisa clonar o repositório do GitHub para a sua máquina local. Você pode fazer isso com o seguinte comando:
 
-(Forneça exemplos de como usar o projeto. Isso pode ser código ou screenshots.)
+git clone https://github.com/seu_usuario/seu_repositorio.git
 
-## Contribuição
+2. Navegue até o diretório do projeto: Use o comando cd para navegar até o diretório do projeto:
 
-(Se o seu projeto estiver aberto para contribuições, explique como os interessados podem contribuir.)
+cd seu_repositorio
 
-## Licença
+3. Crie o banco de dados: Antes de iniciar a aplicação, você precisa criar o banco de dados. Como você está usando PostgreSQL, você pode fazer isso com o seguinte comando (substitua seu_usuario e seu_banco_de_dados pelos valores corretos):
 
-(Inclua informações sobre a licença do seu projeto.)
+psql -U seu_usuario -c "CREATE DATABASE seu_banco_de_dados;"
+
+4. Execute o DDL: Agora, você pode executar o arquivo ddl.sql para criar a tabela clients no banco de dados. Você pode fazer isso com o seguinte comando:
+
+psql -U seu_usuario -d teste_fullstack -a -f ddl.sql
+
+5. Instale as dependências do backend: Navegue até o diretório /backend e instale as dependências com o comando npm install:
+
+cd backend
+npm install
+
+6. Inicie o servidor do backend: Inicie o servidor do backend com o comando npm start:
+
+npm start
+
+7. Instale as dependências do frontend: Em um novo terminal, navegue até o diretório /frontend e instale as dependências com o comando npm install:
+
+cd ../frontend
+npm install
+
+8. Inicie o servidor do frontend: Inicie o servidor do frontend com o comando npm start:
+
+npm start
