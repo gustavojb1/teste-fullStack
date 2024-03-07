@@ -1,6 +1,6 @@
-import { ClientBusiness } from "../../src/business/ClientBusiness";
-import { BruteForceOutputDTO, ClientDTO } from "../../src/dtos/ClientDTO";
-import { Client } from "../../src/models/Client";
+import { ClientBusiness } from "../../business/ClientBusiness";
+import { BruteForceOutputDTO, ClientDTO } from "../../dtos/ClientDTO";
+import { Client } from "../../models/Client";
 
 // Mock para ClientDTO
 const mockClientDTO: ClientDTO = {
@@ -10,13 +10,13 @@ const mockClientDTO: ClientDTO = {
     createOutput: jest.fn(),
     deleteClientInput: jest.fn(),
     deleteClientOutput: jest.fn(),
-    bruteForceOutput: jest.fn((rota) => ({
+    bruteForceOutput: jest.fn(),
+    heuristicOutput: jest.fn((rota) => ({
       rota: rota.map(client => client.toDBModel())
-    })),
-    heuristicOutput: jest.fn()
+    }))
   };
   
-  describe("Test bruteForce function", () => {
+  describe("Test heuristic function", () => {
     test("Should return the correct output when input is valid", async () => {
       const mockClientDatabase: any = {
         getClients: jest.fn(async () => [
@@ -27,7 +27,7 @@ const mockClientDTO: ClientDTO = {
   
       const clientBusiness = new ClientBusiness(mockClientDTO, mockClientDatabase);
   
-      const result: BruteForceOutputDTO = await clientBusiness.bruteForce();
+      const result: BruteForceOutputDTO = await clientBusiness.heuristic();
   
       expect(result).toEqual({
         rota: [
@@ -46,6 +46,6 @@ const mockClientDTO: ClientDTO = {
     
         const clientBusiness = new ClientBusiness(mockClientDTO, mockClientDatabase);
     
-        await expect(clientBusiness.bruteForce()).rejects.toThrow("Impossível fazer o cálculo com menos de 2 clientes cadastrados");
+        await expect(clientBusiness.heuristic()).rejects.toThrow("Impossível fazer o cálculo com menos de 2 clientes cadastrados");
       });
   });
