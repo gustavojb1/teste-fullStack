@@ -1,5 +1,5 @@
-import { ClientBusiness } from "../../src/business/ClientBusiness";
-import { ClientDTO, CreateClientInputDTO, CreateClientOutputDTO } from "../../src/dtos/ClientDTO";
+import { ClientBusiness } from "../../business/ClientBusiness";
+import { ClientDTO, CreateClientInputDTO, CreateClientOutputDTO } from "../../dtos/ClientDTO";
 
 // Mock para ClientDTO
 const mockClientDTO: ClientDTO = {

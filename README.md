@@ -53,35 +53,73 @@ O frontend desta aplicação foi construído com React, uma biblioteca JavaScrip
 Siga os passos abaixo para instalar e executar o projeto localmente:
 
 1. **Clone o repositório**: Primeiro, você precisa clonar o repositório do GitHub para a sua máquina local. Você pode fazer isso com o seguinte comando:
-
-git clone https://github.com/seu_usuario/seu_repositorio.git
+```bash
+git clone https://github.com/gustavojb1/teste-fullStack.git
+```
 
 2. Navegue até o diretório do projeto: Use o comando cd para navegar até o diretório do projeto:
+```bash
+cd teste-fullStack
+```
+3. o arquivo ddl.sql encontra-se na raiz como solicitado no teste porém encontra-se também a querys necessárias para criação do banco de dados no arquivo DB.sql também na raiz
 
-cd seu_repositorio
+Query:
+```bash
+CREATE DATABASE teste_fullStack;
 
-3. Crie o banco de dados: Antes de iniciar a aplicação, você precisa criar o banco de dados. Como você está usando PostgreSQL, você pode fazer isso com o seguinte comando (substitua seu_usuario e seu_banco_de_dados pelos valores corretos):
+\c teste_fullStack;
 
-psql -U seu_usuario -c "CREATE DATABASE seu_banco_de_dados;"
+CREATE SCHEMA IF NOT EXISTS clients
+    AUTHORIZATION postgres;
 
-4. Execute o DDL: Agora, você pode executar o arquivo ddl.sql para criar a tabela clients no banco de dados. Você pode fazer isso com o seguinte comando:
+CREATE TABLE clients.clients (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    telefone VARCHAR(15),
+    x NUMERIC,
+    y NUMERIC
+);
+```
+obs.: a tabela client precisa estar dentro do schema clients
 
-psql -U seu_usuario -d teste_fullstack -a -f ddl.sql
+5. Corrija o arquivo .env dentro da pasta "teste-fullStack/backend" com seus dados do banco de dados PostgreSQL
+```bash
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASS=postgres123
+DB_NAME=teste_fullstack
+```
 
-5. Instale as dependências do backend: Navegue até o diretório /backend e instale as dependências com o comando npm install:
-
+6. Instale as dependências do backend: Navegue até o diretório /backend e instale as dependências com o comando npm install:
+```bash
 cd backend
 npm install
+```
 
-6. Inicie o servidor do backend: Inicie o servidor do backend com o comando npm start:
-
+7. Inicie o servidor do backend: Inicie o servidor do backend com o comando npm start:
+```bash
 npm start
+```
+certifique que a porta 3003 esteja livre, caso não seja possível altere a porta no .env no diretório /backend
+```bash
+SERVER_PORT=3003
+```
+caso altere a SERVER_PORT precisará alterar tambem no .env na pasta /frontend a variável VITE_SERVER_PORT
+```bash
+VITE_SERVER_HOST=localhost
+VITE_SERVER_PORT=3003
+```
 
-7. Instale as dependências do frontend: Em um novo terminal, navegue até o diretório /frontend e instale as dependências com o comando npm install:
-
+8. Instale as dependências do frontend: Em um novo terminal, navegue até o diretório /frontend e instale as dependências com o comando npm install:
+```bash
 cd ../frontend
 npm install
+```
 
-8. Inicie o servidor do frontend: Inicie o servidor do frontend com o comando npm start:
-
+9. Inicie o servidor do frontend: Inicie o servidor do frontend com o comando npm start:
+```bash
 npm start
+```
+geralmente o vite irá emular na porta  http://localhost:5173/ mas será mostrado no terminal
