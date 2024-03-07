@@ -260,7 +260,7 @@ const TableClientes = forwardRef((props, ref) => {
   const handleClickReset = () => {
     setFilter({
       page: 1,
-      pageSize: 10,
+      pageSize: 9,
       nome: "",
       email: "",
       telefone: "",

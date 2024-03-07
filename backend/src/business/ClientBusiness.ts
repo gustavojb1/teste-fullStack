@@ -188,15 +188,6 @@ export class ClientBusiness {
 
     }
 
-
-    private calculateDistance(point1: ClientToCalculate, point2: ClientToCalculate): number { // Função para calcular a distância entre dois pontos
-        const dx = point2.x - point1.x; // Calcular a diferença entre as coordenadas x dos dois pontos
-        const dy = point2.y - point1.y; // Calcular a diferença entre as coordenadas y dos dois pontos
-        return Math.sqrt(dx * dx + dy * dy); // Calcular a distância entre os dois pontos usando o teorema de Pitágoras
-        // ou seja pitagoras é a raiz quadrada da soma dos quadrados dos catetos(cateto é a diferença entre as coordenadas x e y dos dois pontos)
-    }
-
-
     private permute(array: ClientToCalculate[]): ClientToCalculate[][] { // Função para calcular todas as permutações(rotas) possíveis
         if (array.length <= 1) return [array];// Se o array tiver apenas um elemento, retorna ele mesmo
         let result = []; // Inicializa um array para armazenar as permutações(possíveis rotas)
@@ -211,8 +202,19 @@ export class ClientBusiness {
             }
         }
         return result; // Retorna todas as permutações(rotas) possíveis
-        //Esse Passo gerará uma complexidade de fatorial O(n!) para o cálculo de todas as permutações possíveis, no caso de 4 clientes, serão 24 rotas possíveis, no caso de 5 clientes, serão 120 rotas possíveis, e assim por diante.
+        //Esse Passo gerará uma complexidade de fatorial para o cálculo de todas as permutações possíveis, no caso de 4 clientes, serão 24 rotas possíveis, no caso de 5 clientes, serão 120 rotas possíveis, e assim por diante.
     }
+
+
+    private calculateDistance(point1: ClientToCalculate, point2: ClientToCalculate): number { // Função para calcular a distância entre dois pontos - Pitágoras
+        //pitagoras é a raiz quadrada da soma dos quadrados dos catetos(cateto é a diferença entre as coordenadas x e y dos dois pontos)
+        const dx = point2.x - point1.x; // Calcular a diferença entre as coordenadas x dos dois pontos
+        const dy = point2.y - point1.y; // Calcular a diferença entre as coordenadas y dos dois pontos
+        return Math.sqrt(dx * dx + dy * dy); // Calcular a distância entre os dois pontos usando o teorema de Pitágoras
+        //pitagoras é a raiz quadrada da soma dos quadrados dos catetos(cateto é a diferença entre as coordenadas x e y dos dois pontos)
+    }
+
+
 
     
     public async heuristic(): Promise<BruteForceOutputDTO> {
@@ -239,8 +241,8 @@ export class ClientBusiness {
             }
         });
     
-        let empresa: ClientToCalculate = { // Criar um objeto para representar a empresa com id 0, nome "Empresa", x 0 e y 0
-            id: 0,
+        let empresa: ClientToCalculate = { // Criar um objeto para representar a empresa com id -1, nome "Empresa", x 0 e y 0
+            id: -1,
             nome: "Empresa",
             x: 0,
             y: 0
@@ -265,8 +267,7 @@ export class ClientBusiness {
             clientsToCalculate = clientsToCalculate.filter(client => client.id !== nearestPoint.id); // Remover o ponto mais próximo da lista de clientes para calcular
             currentPoint = nearestPoint; // Atualizar o ponto atual com o ponto mais próximo
         }
-    
-        route.push(empresa);  // Retornar à empresa
+        console.log(route);
     
         // Buscar novamente os dados completos dos clientes
         const routeClients: Client[] = [];
